@@ -10,6 +10,8 @@ class PessoaPage extends StatefulWidget {
 class _PessoaPageState extends State<PessoaPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+    );
   }
 }

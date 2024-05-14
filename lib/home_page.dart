@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: Row(
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                padding: const EdgeInsets.fromLTRB(80, 30, 80, 30),
+                padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
                 textStyle: const TextStyle(fontSize: 24),
               ),
               icon: Icon(
@@ -39,10 +40,31 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-              onPressed: null,
+              onPressed: (){
+                showDialog(
+                context: context, 
+                builder: (context) =>AlertDialog(
+                  title: Column(
+                      children: [
+                        Text(
+                          'Tabela Fipe',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(255, 92, 0, 1),  
+                            fontSize: 20,
+                          ),
+                        ),
+                        Divider( // Linha abaixo do título
+                          color: Color.fromRGBO(255, 92, 0, 1),
+                          thickness: 1,
+                        ),
+                      ],
+                    ),
+                ));
+              },
             ),
           ],
-        ),
+                       ),
       ),
     );
   }

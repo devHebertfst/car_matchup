@@ -54,7 +54,7 @@ class CustomPageState extends State<CustomPage> {
               );
             },
           ),
-          SizedBox(width: 20),
+          SizedBox(width: 10),
         ],
       ),
       drawer: Drawer(
@@ -75,7 +75,7 @@ class CustomPageState extends State<CustomPage> {
             ),
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('Cotação'),
+              title: const Text('Home'),
               onTap: () {
                 setState(() {
                   paginaAtual = 0;
@@ -86,7 +86,7 @@ class CustomPageState extends State<CustomPage> {
             ),
             ListTile(
               leading: const Icon(Icons.favorite),
-              title: const Text('Bitcoins'),
+              title: const Text('Favoritos'),
               onTap: () {
                 setState(() {
                   paginaAtual = 1;
@@ -97,7 +97,7 @@ class CustomPageState extends State<CustomPage> {
             ),
             ListTile(
               leading: const Icon(Icons.car_crash),
-              title: const Text('Ações'),
+              title: const Text('Meu Carro'),
               onTap: () {
                 setState(() {
                   paginaAtual = 2;
@@ -119,6 +119,9 @@ class CustomPageState extends State<CustomPage> {
         onPageChanged: setPaginaAtual,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        selectedItemColor: Color.fromRGBO(255, 92, 0, 1),
+        elevation: 0,
         type: BottomNavigationBarType.fixed,
         currentIndex: paginaAtual,
         items: const [
