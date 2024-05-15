@@ -57,56 +57,97 @@ class CustomPageState extends State<CustomPage> {
           SizedBox(width: 10),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
-              color: Color.fromRGBO(255, 92, 0, 1),
-              ),
-              child: Text(
-                'Menu',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 24,
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          dividerTheme: DividerThemeData(color: Colors.transparent),
+        ),
+        child: Drawer(
+          backgroundColor: Color.fromRGBO(255, 92, 0, 1),
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(
+                  'Menu',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                setState(() {
-                  paginaAtual = 0;
-                  pc.jumpToPage(paginaAtual);
-                });
-                Navigator.pop(context); // Fecha o Drawer
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.favorite),
-              title: const Text('Favoritos'),
-              onTap: () {
-                setState(() {
-                  paginaAtual = 1;
-                  pc.jumpToPage(paginaAtual);
-                });
-                Navigator.pop(context); // Fecha o Drawer
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.car_crash),
-              title: const Text('Meu Carro'),
-              onTap: () {
-                setState(() {
-                  paginaAtual = 2;
-                  pc.jumpToPage(paginaAtual);
-                });
-                Navigator.pop(context); // Fecha o Drawer
-              },
-            ),
-          ],
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: Text(
+                  'Home',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                  ),
+                onTap: () {
+                  setState(() {
+                    paginaAtual = 0;
+                    pc.jumpToPage(paginaAtual);
+                  });
+                  Navigator.pop(context); // Fecha o Drawer
+                },
+              ),
+              const Divider( // Linha abaixo do título
+                          color: Colors.black,
+                          thickness: 1,
+                          height: 10,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
+              ListTile(
+                leading: const Icon(Icons.favorite),
+                title: Text(
+                  'Favoritos',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                  ),
+                onTap: () {
+                  setState(() {
+                    paginaAtual = 1;
+                    pc.jumpToPage(paginaAtual);
+                  });
+                  Navigator.pop(context); // Fecha o Drawer
+                },
+              ),
+              const Divider( // Linha abaixo do título
+                          color: Colors.black,
+                          thickness: 1,
+                          height: 10,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
+              ListTile(
+                leading: const Icon(Icons.car_crash),
+                title: Text(
+                  'Meu Carro',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                  ),
+                onTap: () {
+                  setState(() {
+                    paginaAtual = 2;
+                    pc.jumpToPage(paginaAtual);
+                  });
+                  Navigator.pop(context); // Fecha o Drawer
+                },
+              ),
+              const Divider( // Linha abaixo do título
+                          color: Colors.black,
+                          thickness: 1,
+                          height: 10,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
+            ],
+          ),
         ),
       ),
       body: PageView(
