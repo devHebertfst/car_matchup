@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'result_page.dart';  // Import the ResultPage
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -154,8 +155,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     items: isMarcaDisabled
                                         ? []
-                                        : marcas
-                                            .map<DropdownMenuItem<String>>((marca) {
+                                        : marcas.map<DropdownMenuItem<String>>((marca) {
                                             return DropdownMenuItem<String>(
                                               value: marca['codigo'].toString(),
                                               child: Text(
@@ -193,8 +193,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     items: isModeloDisabled
                                         ? []
-                                        : modelos
-                                            .map<DropdownMenuItem<String>>((modelo) {
+                                        : modelos.map<DropdownMenuItem<String>>((modelo) {
                                             return DropdownMenuItem<String>(
                                               value: modelo['codigo'].toString(),
                                               child: Text(
@@ -204,55 +203,53 @@ class _HomePageState extends State<HomePage> {
                                             );
                                           }).toList(),
                                     onChanged: isModeloDisabled
-                                      ? null
-                                      : (String? modelo) async {
-                                          setState(() {
-                                            selectedModelo = modelo;
-                                            isAnoDisabled = modelo == null;
-                                            selectedAno = null;
-                                          });
-                                          if (modelo != null) {
-                                            final anosList = await fetchAnos(selectedTipo!, selectedMarca!, modelo);
+                                        ? null
+                                        : (String? modelo) async {
                                             setState(() {
-                                              anos = anosList;
-                                              isAnoDisabled = false;
+                                              selectedModelo = modelo;
+                                              isAnoDisabled = modelo == null;
+                                              selectedAno = null;
                                             });
-                                          }
-                                        },
-
+                                            if (modelo != null) {
+                                              final anosList = await fetchAnos(selectedTipo!, selectedMarca!, modelo);
+                                              setState(() {
+                                                anos = anosList;
+                                                isAnoDisabled = false;
+                                              });
+                                            }
+                                          },
                                     value: selectedModelo,
                                   ),
                                   const SizedBox(height: 20),
                                   DropdownButtonFormField<String>(
-                                  isExpanded: true,
-                                  decoration: InputDecoration(
-                                    labelText: 'Ano',
-                                    labelStyle: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(169, 169, 169, 1),
-                                      fontWeight: FontWeight.w400,
+                                    isExpanded: true,
+                                    decoration: InputDecoration(
+                                      labelText: 'Ano',
+                                      labelStyle: GoogleFonts.poppins(
+                                        color: const Color.fromRGBO(169, 169, 169, 1),
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
+                                    items: isAnoDisabled
+                                        ? []
+                                        : anos.map<DropdownMenuItem<String>>((ano) {
+                                            return DropdownMenuItem<String>(
+                                              value: ano['codigo'].toString(),
+                                              child: Text(
+                                                ano['nome'],
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            );
+                                          }).toList(),
+                                    onChanged: isAnoDisabled
+                                        ? null
+                                        : (String? ano) {
+                                            setState(() {
+                                              selectedAno = ano;
+                                            });
+                                          },
+                                    value: selectedAno,
                                   ),
-                                  items: isAnoDisabled
-                                      ? []
-                                      : anos
-                                          .map<DropdownMenuItem<String>>((ano) {
-                                          return DropdownMenuItem<String>(
-                                            value: ano['codigo'].toString(),
-                                            child: Text(
-                                              ano['codigo'],
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          );
-                                        }).toList(),
-                                  onChanged: isAnoDisabled
-                                      ? null
-                                      : (String? ano) {
-                                          setState(() {
-                                            selectedAno = ano;
-                                          });
-                                        },
-                                  value: selectedAno,
-                                ),
                                   const SizedBox(height: 20),
                                   TextButton(
                                     style: TextButton.styleFrom(
@@ -265,7 +262,19 @@ class _HomePageState extends State<HomePage> {
                                       textStyle: const TextStyle(fontSize: 15),
                                     ),
                                     onPressed: () {
-                                      // Handle search button press
+                                      if (selectedTipo != null && selectedMarca != null && selectedModelo != null && selectedAno != null) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ResultPage(
+                                              tipo: selectedTipo!,
+                                              marca: selectedMarca!,
+                                              modelo: selectedModelo!,
+                                              ano: selectedAno!,
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     },
                                     child: Text(
                                       'Pesquisar',
@@ -304,16 +313,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
- Future<List<dynamic>> fetchAnos(String tipo, String marca, String modelo) async {
-  final response = await http.get(Uri.parse('https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos'));
-  if (response.statusCode == 200) {
-    return json.decode(response.body);
-  } else {
-    throw Exception('Failed to load anos');
+  Future<List<dynamic>> fetchAnos(String tipo, String marca, String modelo) async {
+    final response = await http.get(Uri.parse('https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos/$modelo/anos'));
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load anos');
+    }
   }
-}
-
-
 
   Future<void> fetchModelos(String tipo, String marca, StateSetter setState) async {
     final response = await http.get(Uri.parse('https://parallelum.com.br/fipe/api/v1/$tipo/marcas/$marca/modelos'));

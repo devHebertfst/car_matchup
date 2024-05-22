@@ -66,14 +66,28 @@ class CustomPageState extends State<CustomPage> {
           child: ListView(
             children: <Widget>[
               DrawerHeader(
-                child: Text(
-                  'Menu',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
+                child: Row(
+                  children: <Widget> [
+                    CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Colors.white,
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('assets/images/img4.jpg'),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Text(
+                      'Fulano',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
                 ),
               ),
+              SizedBox(height: 30),
               ListTile(
                 leading: const Icon(Icons.home),
                 title: Text(
@@ -81,6 +95,7 @@ class CustomPageState extends State<CustomPage> {
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
                   ),
                 onTap: () {
@@ -105,6 +120,7 @@ class CustomPageState extends State<CustomPage> {
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
                   ),
                 onTap: () {
@@ -129,6 +145,7 @@ class CustomPageState extends State<CustomPage> {
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
                   ),
                 onTap: () {
