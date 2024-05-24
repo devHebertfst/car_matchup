@@ -9,8 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
   google_fonts: ^6.2.1
   http: ^1.2.1
+
+flutter_native_splash:
+  color: "#FF5C00"
+  image: "assets/images/splash.png"
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: "assets/images/icon.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/icon-android.png"
 
 dev_dependencies:
   flutter_test:
