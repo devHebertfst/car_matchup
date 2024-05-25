@@ -1,3 +1,4 @@
+import 'package:car_matchup/carro.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -81,12 +82,25 @@ class _ResultPageState extends State<ResultPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                                padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                                 textStyle: const TextStyle(fontSize: 15),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (vehicleData != null) {
+                                  final carro = Carro(
+                                    modelo: vehicleData!['Modelo'],
+                                    marca: vehicleData!['Marca'],
+                                    anoModelo: vehicleData!['AnoModelo'].toString(),
+                                    combustivel: vehicleData!['Combustivel'],
+                                    mesReferencia: vehicleData!['MesReferencia'],
+                                    valor: vehicleData!['Valor'],
+                                    isExpanded: false,
+                                  );
+                                  FavoritesManager.adicionarFavorito(carro);
+                                }
+                              },
                               child: Text(
-                                'Ver detalhes',
+                                'Adicionar aos Favoritos',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -98,29 +112,6 @@ class _ResultPageState extends State<ResultPage> {
                         ],
                       ),
                     ),
-            ),
-            SizedBox(height: 50),
-            Center(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(255, 92, 0, 1),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-                  textStyle: const TextStyle(fontSize: 15),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Adicionar aos favoritos',
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
             ),
           ],
         ),

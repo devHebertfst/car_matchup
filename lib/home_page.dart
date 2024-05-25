@@ -171,6 +171,7 @@ class _HomePageState extends State<HomePage> {
                                               selectedMarca = marca;
                                               isModeloDisabled = marca == null;
                                               selectedModelo = null;
+                                              selectedAno = null;
                                               isAnoDisabled = true;
                                               modelos = [];
                                               anos = [];

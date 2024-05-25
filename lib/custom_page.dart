@@ -89,7 +89,7 @@ class CustomPageState extends State<CustomPage> {
               ),
               SizedBox(height: 30),
               ListTile(
-                leading: const Icon(Icons.home),
+                leading: Icon(Icons.home,color: Colors.white),
                 title: Text(
                   'Home',
                   style: GoogleFonts.poppins(
@@ -114,7 +114,7 @@ class CustomPageState extends State<CustomPage> {
                           endIndent: 15,
                         ),
               ListTile(
-                leading: const Icon(Icons.favorite),
+                leading: Icon(Icons.favorite, color: Colors.white),
                 title: Text(
                   'Favoritos',
                   style: GoogleFonts.poppins(
@@ -139,7 +139,7 @@ class CustomPageState extends State<CustomPage> {
                           endIndent: 15,
                         ),
               ListTile(
-                leading: const Icon(Icons.car_crash),
+                leading: const Icon(Icons.car_crash, color: Colors.white),
                 title: Text(
                   'Meu Carro',
                   style: GoogleFonts.poppins(
