@@ -37,3 +37,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/img4.jpg
+    - assets/images/Image22.png
+    - assets/images/Image23.png
+    - assets/images/Image24.png
+    - assets/images/Image25.png
+    - assets/json/carros.json
