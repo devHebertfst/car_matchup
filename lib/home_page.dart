@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:car_matchup/car_modelo.dart';
 import 'package:car_matchup/car_tile.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'result_page.dart';
 import 'fipe_form.dart';
+import 'car_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,21 +25,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadCarros() async {
-  final String response = await rootBundle.loadString('assets/json/carros.json');
-  final List<dynamic> data = json.decode(response);
-  setState(() {
-    _carros = data.map((item) => CarModel.fromJson(item)).toList();
-  });
-}
-
-
+    final String response = await rootBundle.loadString('assets/json/carros.json');
+    final List<dynamic> data = json.decode(response);
+    setState(() {
+      _carros = data.map((item) => CarModel.fromJson(item)).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 16, right: 16), // Added left and right padding
+        padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -115,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 40), // Add some spacing between the button and the ListView
+            const SizedBox(height: 40),
             Container(
               height: 160,
               child: ListView(

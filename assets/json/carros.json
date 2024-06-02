@@ -4,36 +4,52 @@
       "marca": "Tesla",
       "modelo": "Tesla Model 3 Long Range AWD",
       "ano": 2018,
-      "preco": 282287,
+      "preco": "R$ 282.287",
       "combustivel": "Eletricidade",
       "lugares": 5,
       "portas": 4,
       "configuracao": "Sedan",
-      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6nT_bnhf-P8f5JjFeq8tnx2q1eS4y1nHQiw&s"
+      "imagens": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6nT_bnhf-P8f5JjFeq8tnx2q1eS4y1nHQiw&s",
+        "https://www.greencarguide.co.uk/wp-content/uploads/2020/04/Tesla-Model-3-Long-Range-003-low-res.jpeg",
+        "https://blog.carlease.uk.com/wp-content/uploads/2019/09/Tesla-MODEL-3-SALOON-Long-Range-AWD-4dr-Auto-Car-Leasing-Best-Offers.jpg",
+        "https://images.thewest.com.au/publication/B881936742Z/1626756472712_GSC3CHM19.2-0.jpg?imwidth=810&impolicy=wan_v3"
+      ]
     },
     {
         "id": 2,
         "marca": "BMW",
         "modelo": "BMW iX1 xDrive30 M Sport",
         "ano": 2024,
-        "preco": 434950,
+        "preco": "R$ 434.950",
         "combustivel": "Eletricidade",
         "lugares": 5,
         "portas": 4,
         "configuracao": "SUV",
-        "imagem": "https://cdn.motor1.com/images/mgl/Znn6K2/s6/2022-bmw-ix1.jpg"
+        "imagens": [
+          "https://cdn.motor1.com/images/mgl/Znn6K2/s6/2022-bmw-ix1.jpg",
+          "https://cdn.motor1.com/images/mgl/KbBKzb/s1/novo-bmw-ix1-m-sport---lancamento-7.jpg",
+          "https://www.bmwtopcar.com.br/fmanager/grupotopcar2019/galeria_carros_novos/t/imagem11192_2.jpg",
+          "https://www.automaistv.com.br/wp-content/uploads/2023/07/bmw_ix1_xdrive30_37-750x450.jpeg"
+
+        ]
       },
       {
         "id": 3,
         "marca": "Ferrari",
         "modelo": "Ferrari Roma 3.9 V8",
         "ano": 2023,
-        "preco": 3472825,
+        "preco": "R$ 3.472.825",
         "combustivel": "Gasolina",
         "lugares": 4,
         "portas": 2,
         "configuracao": "Cupê",
-        "imagem": "https://www.exoticus.com.br/essential/uploads/2023/09/ferrari-roma-3-9-v8-vermelha-2021-01-1.jpeg"
+        "imagens": [
+          "https://www.exoticus.com.br/essential/uploads/2023/09/ferrari-roma-3-9-v8-vermelha-2021-01-1.jpeg",
+          "https://www.exoticus.com.br/essential/uploads/2023/09/ferrari-roma-3-9-v8-vermelha-2021-04.jpeg",
+          "https://yenikoymotors.com/uploads/2022/9/TDDKAY-63225937565.jpg",
+          "https://http2.mlstatic.com/D_NQ_NP_777342-MLB76104176469_042024-O.webp"
+        ]
         
       },
       {
@@ -41,12 +57,17 @@
         "marca": "Lamborghini",
         "modelo": "Lamborghini Revuelto 6.5 V12",
         "ano": 2024,
-        "preco": 9800000,
+        "preco": "R$ 9.800.000",
         "combustivel": "Eletricidade/Gasolina",
         "lugares": 2,
         "portas": 2,
         "configuracao": "Cupê",
-        "imagem": "https://p2.trrsf.com/image/fget/cf/940/0/images.terra.com/2023/03/29/lamborghini_revuelto-abre-2-vb6dkzypsta1.jpg"
+        "imagens": [
+          "https://p2.trrsf.com/image/fget/cf/940/0/images.terra.com/2023/03/29/lamborghini_revuelto-abre-2-vb6dkzypsta1.jpg",
+          "https://p2.trrsf.com/image/fget/cf/940/0/images.terra.com/2023/03/29/lamborghini_revuelto-2-1h7j6grh1z41f.jpg",
+          "https://www.automaistv.com.br/wp-content/uploads/2023/03/https___www.carscoops_edited8-750x450.jpg",
+          "https://miamiimports.com.br/wp-content/uploads/2024/01/lamborghini-revuelto-foto-fullinterior-1.jpg"
+          ]
         
       },
       {
@@ -54,12 +75,17 @@
         "marca": "Fiat",
         "modelo": "Fiat Strada Ultra 1.0 Turbo",
         "ano": 2025,
-        "preco": 137990,
+        "preco": "R$ 137.990",
         "combustivel": "Álcool/Gasolina",
         "lugares": 5,
         "portas": 4,
         "configuracao": "Picape",
-        "imagem": "https://s2-autoesporte.glbimg.com/_9Q6ikIilfY3zFNGngWF2MfLQeo=/0x152:906x641/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/9/z/YVPCUBQLuXxUreGoHE8g/2023-08-09-16-44-47-fiat-strada-ultra-my24-021.jpg-fotos.png"
+        "imagens": [
+          "https://s2-autoesporte.glbimg.com/_9Q6ikIilfY3zFNGngWF2MfLQeo=/0x152:906x641/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/9/z/YVPCUBQLuXxUreGoHE8g/2023-08-09-16-44-47-fiat-strada-ultra-my24-021.jpg-fotos.png",
+          "https://www.otempo.com.br/content/dam/otempo/editorias/autotempo/2023/11/autotempo-fiat-strada-ultra-estreou-na-linha-2024-da-picape-com-motor-10-turbo-de-130-cv-1708384589.jpeg",
+          "https://uploads.diariodopoder.com.br/2023/08/239e3134-2batch_fiat_strada_ultra_my24_027.jpg",
+          "https://quatrorodas.abril.com.br/wp-content/uploads/2023/08/Fiat-Strada-Ultra-T200-2024-8.jpg?quality=70&strip=info"
+          ]
         }
     
   ]
