@@ -5,14 +5,14 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
-class PessoaPage extends StatefulWidget {
-  const PessoaPage({super.key});
+class MyCarPage extends StatefulWidget {
+  const MyCarPage({super.key});
 
   @override
-  State<PessoaPage> createState() => _PessoaPageState();
+  State<MyCarPage> createState() => _MyCarPageState();
 }
 
-class _PessoaPageState extends State<PessoaPage> {
+class _MyCarPageState extends State<MyCarPage> {
   File? _image;
   DateTime? _nextOilChange;
   DateTime? _lastWorkshopVisit;
@@ -96,7 +96,7 @@ class _PessoaPageState extends State<PessoaPage> {
             GestureDetector(
               onTap: _pickImage,
               child: Container(
-                width: 200,
+                width: 300,
                 height: 200,
                 color: Colors.grey[300],
                 child: _image == null
@@ -124,36 +124,70 @@ class _PessoaPageState extends State<PessoaPage> {
               style: GoogleFonts.poppins(fontSize: 16),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => _selectDate(context, _nextOilChange, (date) {
-                setState(() {
+            Container(
+                width: 300,
+                height: 64,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(255, 92, 0, 1),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    textStyle: const TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () => _selectDate(context, _nextOilChange, (date) {
+                  setState(() {
                   _nextOilChange = date;
-                });
-              }),
-              child: Text(
+                  });
+                  }),
+                  child: Text(
                 _nextOilChange == null
                     ? 'Selecionar data'
                     : 'Data: ${_nextOilChange!.day}/${_nextOilChange!.month}/${_nextOilChange!.year}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
-            ),
+                ),
+              ),
             SizedBox(height: 20),
             Text(
               'Última ida à oficina',
               style: GoogleFonts.poppins(fontSize: 16),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => _selectDate(context, _lastWorkshopVisit, (date) {
-                setState(() {
+            Container(
+                width: 300,
+                height: 64,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(255, 92, 0, 1),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    textStyle: const TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () => _selectDate(context, _lastWorkshopVisit, (date) {
+                  setState(() {
                   _lastWorkshopVisit = date;
-                });
-              }),
-              child: Text(
-                _lastWorkshopVisit == null
+                  });
+                  }),
+                  child: Text(
+                    _lastWorkshopVisit == null
                     ? 'Selecionar data'
                     : 'Data: ${_lastWorkshopVisit!.day}/${_lastWorkshopVisit!.month}/${_lastWorkshopVisit!.year}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
-            ),
+                ),
+              ),
           ],
         ),
       ),

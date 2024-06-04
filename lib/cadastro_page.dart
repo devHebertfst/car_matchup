@@ -66,7 +66,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.person, color: Colors.grey),
-                        hintText: 'Nome Completo',
+                        hintText: 'Nome de usuário',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),

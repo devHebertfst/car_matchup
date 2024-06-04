@@ -7,6 +7,7 @@ class CarModel {
   final int lugares;
   final int portas;
   final String preco;
+  final String categoria;
   final String configuracao;
 
   final List<String> imagens;
@@ -22,6 +23,7 @@ class CarModel {
     required this.portas,
     required this.imagens,
     required this.preco,
+    required this.categoria,
   });
 
   factory CarModel.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class CarModel {
     lugares: json['lugares'],
     portas: json['portas'],
     preco: json['preco'],
+    categoria: json['categoria'],
     imagens: imagens, // Usando a lista de imagens processada
   );
 }

@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<CarModel> _carros = [];
+  Map<String, List<CarModel>> _carrosPorCategoria = {};
 
   @override
   void initState() {
@@ -29,101 +30,160 @@ class _HomePageState extends State<HomePage> {
     final List<dynamic> data = json.decode(response);
     setState(() {
       _carros = data.map((item) => CarModel.fromJson(item)).toList();
+      _carrosPorCategoria = _categorizeCarros(_carros);
     });
+  }
+
+  Map<String, List<CarModel>> _categorizeCarros(List<CarModel> carros) {
+    Map<String, List<CarModel>> categorizedCarros = {};
+    for (var car in carros) {
+      if (categorizedCarros.containsKey(car.categoria)) {
+        categorizedCarros[car.categoria]!.add(car);
+      } else {
+        categorizedCarros[car.categoria] = [car];
+      }
+    }
+    return categorizedCarros;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(255, 92, 0, 1),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Tabela Fipe Button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton.icon(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(255, 92, 0, 1),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+                      textStyle: const TextStyle(fontSize: 24),
                     ),
-                    padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-                    textStyle: const TextStyle(fontSize: 24),
-                  ),
-                  icon: const Icon(
-                    Icons.search_rounded,
-                    color: Colors.white,
-                    size: 25,
-                  ),
-                  label: Text(
-                    'Tabela Fipe',
-                    style: GoogleFonts.poppins(
+                    icon: const Icon(
+                      Icons.search_rounded,
                       color: Colors.white,
-                      fontWeight: FontWeight.w700,
+                      size: 25,
                     ),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          backgroundColor: Colors.white,
-                          title: Column(
-                            children: [
-                              Text(
-                                'Tabela Fipe',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromRGBO(255, 92, 0, 1),
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const Divider(
-                                color: Color.fromRGBO(255, 92, 0, 1),
-                                thickness: 1,
-                                height: 10,
-                                indent: 30,
-                                endIndent: 30,
-                              ),
-                            ],
-                          ),
-                          content: FipeForm(
-                            onSubmit: (tipo, marca, modelo, ano) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ResultPage(
-                                    tipo: tipo,
-                                    marca: marca,
-                                    modelo: modelo,
-                                    ano: ano,
+                    label: Text(
+                      'Tabela Fipe',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: Column(
+                              children: [
+                                Text(
+                                  'Tabela Fipe',
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color.fromRGBO(255, 92, 0, 1),
+                                    fontSize: 20,
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            Container(
-              height: 160,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _carros.map((car) => CarTile(car: car)).toList(),
+                                const Divider(
+                                  color: Color.fromRGBO(255, 92, 0, 1),
+                                  thickness: 1,
+                                  height: 10,
+                                  indent: 30,
+                                  endIndent: 30,
+                                ),
+                              ],
+                            ),
+                            content: FipeForm(
+                              onSubmit: (tipo, marca, modelo, ano) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultPage(
+                                      tipo: tipo,
+                                      marca: marca,
+                                      modelo: modelo,
+                                      ano: ano,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-          ],
+              const SizedBox(height: 40),
+              // Horizontal ListView
+              Container(
+                height: 160,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: _carros.map((car) => CarTile(car: car)).toList(),
+                ),
+              ),
+              const SizedBox(height: 40),
+              ..._buildCarCategorySections(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  List<Widget> _buildCarCategorySections() {
+    List<Widget> sections = [];
+    _carrosPorCategoria.forEach((categoria, carros) {
+      sections.add(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(9, 0, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '$categoria',
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemCount: carros.length,
+              itemBuilder: (context, index) {
+                return CarTile(car: carros[index]);
+              },
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
+      );
+    });
+    return sections;
   }
 }

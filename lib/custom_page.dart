@@ -1,9 +1,11 @@
 import 'package:car_matchup/noticias_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'favoritos_page.dart';
 import 'home_page.dart';
-import 'pessoa_page.dart';
+import 'myCar_page.dart';
 
 class CustomPage extends StatefulWidget {
   const CustomPage({Key? key}) : super(key: key);
@@ -15,6 +17,8 @@ class CustomPage extends StatefulWidget {
 class CustomPageState extends State<CustomPage> {
   int paginaAtual = 0;
   late PageController pc;
+  File? _image;
+  bool permissionGranted = false;
 
   @override
   void initState() {
@@ -26,6 +30,15 @@ class CustomPageState extends State<CustomPage> {
     setState(() {
       paginaAtual = pagina;
     });
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 
   @override
@@ -50,7 +63,7 @@ class CustomPageState extends State<CustomPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NoticiasPage()), // Substitua 'NoticiasPage()' pelo nome da sua página de notícias
+                MaterialPageRoute(builder: (context) => NoticiasPage()),
               );
             },
           ),
@@ -67,13 +80,18 @@ class CustomPageState extends State<CustomPage> {
             children: <Widget>[
               DrawerHeader(
                 child: Row(
-                  children: <Widget> [
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.white,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: _pickImage,
                       child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage('assets/images/img4.jpg'),
+                        radius: 55,
+                        backgroundColor: Colors.white,
+                        child: _image == null
+                            ? Icon(Icons.add, size: 50, color: Colors.grey)
+                            : CircleAvatar(
+                                radius: 50,
+                                backgroundImage: FileImage(_image!),
+                              ),
                       ),
                     ),
                     SizedBox(width: 20),
@@ -83,13 +101,13 @@ class CustomPageState extends State<CustomPage> {
                         color: Colors.white,
                         fontSize: 24,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
               SizedBox(height: 30),
               ListTile(
-                leading: Icon(Icons.home,color: Colors.white),
+                leading: Icon(Icons.home, color: Colors.white),
                 title: Text(
                   'Home',
                   style: GoogleFonts.poppins(
@@ -97,7 +115,7 @@ class CustomPageState extends State<CustomPage> {
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
-                  ),
+                ),
                 onTap: () {
                   setState(() {
                     paginaAtual = 0;
@@ -106,13 +124,13 @@ class CustomPageState extends State<CustomPage> {
                   Navigator.pop(context); // Fecha o Drawer
                 },
               ),
-              const Divider( // Linha abaixo do título
-                          color: Colors.black,
-                          thickness: 1,
-                          height: 10,
-                          indent: 15,
-                          endIndent: 15,
-                        ),
+              const Divider(
+                color: Colors.black,
+                thickness: 1,
+                height: 10,
+                indent: 15,
+                endIndent: 15,
+              ),
               ListTile(
                 leading: Icon(Icons.favorite, color: Colors.white),
                 title: Text(
@@ -122,7 +140,7 @@ class CustomPageState extends State<CustomPage> {
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
-                  ),
+                ),
                 onTap: () {
                   setState(() {
                     paginaAtual = 1;
@@ -131,13 +149,13 @@ class CustomPageState extends State<CustomPage> {
                   Navigator.pop(context); // Fecha o Drawer
                 },
               ),
-              const Divider( // Linha abaixo do título
-                          color: Colors.black,
-                          thickness: 1,
-                          height: 10,
-                          indent: 15,
-                          endIndent: 15,
-                        ),
+              const Divider(
+                color: Colors.black,
+                thickness: 1,
+                height: 10,
+                indent: 15,
+                endIndent: 15,
+              ),
               ListTile(
                 leading: const Icon(Icons.car_crash, color: Colors.white),
                 title: Text(
@@ -147,7 +165,7 @@ class CustomPageState extends State<CustomPage> {
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
-                  ),
+                ),
                 onTap: () {
                   setState(() {
                     paginaAtual = 2;
@@ -156,13 +174,13 @@ class CustomPageState extends State<CustomPage> {
                   Navigator.pop(context); // Fecha o Drawer
                 },
               ),
-              const Divider( // Linha abaixo do título
-                          color: Colors.black,
-                          thickness: 1,
-                          height: 10,
-                          indent: 15,
-                          endIndent: 15,
-                        ),
+              const Divider(
+                color: Colors.black,
+                thickness: 1,
+                height: 10,
+                indent: 15,
+                endIndent: 15,
+              ),
             ],
           ),
         ),
@@ -171,7 +189,7 @@ class CustomPageState extends State<CustomPage> {
         children: [
           HomePage(),
           FavoritosPage(),
-          PessoaPage(),
+          MyCarPage(),
         ],
         controller: pc,
         onPageChanged: setPaginaAtual,

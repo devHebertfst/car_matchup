@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.person, color: Colors.grey),
-                        hintText: 'Nome',
+                        hintText: 'Usuário',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
