@@ -64,8 +64,7 @@ class _FavoritosPageState extends State<FavoritosPage> {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    FavoritesManager.removerFavorito(carro);
-                                    setState(() {});
+                                    _showRemoveDialog(carro);
                                   },
                                   icon: Icon(Icons.delete_forever, color: Color.fromRGBO(255, 92, 0, 1)),
                                 ),
@@ -102,6 +101,35 @@ class _FavoritosPageState extends State<FavoritosPage> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showRemoveDialog(Carro carro) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Remover Favorito',
+          style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600)),
+          content: Text('Você quer remover este veículo dos favoritos?',style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400)),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Não',style: GoogleFonts.poppins(fontSize: 16,color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
+            ),
+            TextButton(
+              onPressed: () {
+                FavoritesManager.removerFavorito(carro);
+                setState(() {});
+                Navigator.of(context).pop();
+              },
+              child: Text('Sim',style: GoogleFonts.poppins(fontSize: 16,color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
+            ),
+          ],
+        );
+      },
     );
   }
 }

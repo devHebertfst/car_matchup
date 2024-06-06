@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:car_matchup/car_modelo.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'video_page.dart';
 
 class CarDetailPage extends StatefulWidget {
   final CarModel car;
@@ -122,6 +123,31 @@ class _CarDetailPageState extends State<CarDetailPage> {
                     _buildRow('Configuração', widget.car.configuracao, labelStyle, valueStyle),
                     _buildRow('Lugares', '${widget.car.lugares}', labelStyle, valueStyle),
                     _buildRow('Portas', '${widget.car.portas}', labelStyle, valueStyle),
+                    SizedBox(height: 16),
+                    Container(
+                      height: 70,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(255, 92, 0, 1), // Background color
+                          foregroundColor: Colors.white, // Text color
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VideoPage(videoUrl: widget.car.video),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Ver Vídeo',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

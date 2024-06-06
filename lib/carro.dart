@@ -1,6 +1,4 @@
-import 'dart:core';
-
-class Carro{
+class Carro {
   Carro({
     required this.marca,
     required this.modelo,
@@ -18,6 +16,16 @@ class Carro{
   String mesReferencia;
   String valor;
   bool isExpanded = false;
+
+  // Método para comparar carros
+  bool isEqual(Carro other) {
+    return this.marca == other.marca &&
+        this.modelo == other.modelo &&
+        this.anoModelo == other.anoModelo &&
+        this.combustivel == other.combustivel &&
+        this.mesReferencia == other.mesReferencia &&
+        this.valor == other.valor;
+  }
 }
 
 class FavoritesManager {
@@ -25,11 +33,15 @@ class FavoritesManager {
 
   static List<Carro> get favoritos => _favoritos;
 
-  static void adicionarFavorito(Carro carro) {
-    _favoritos.add(carro);
+  static bool adicionarFavorito(Carro carro) {
+    if (!_favoritos.any((favorito) => favorito.isEqual(carro))) {
+      _favoritos.add(carro);
+      return true;
+    }
+    return false;
   }
 
   static void removerFavorito(Carro carro) {
-    _favoritos.remove(carro);
+    _favoritos.removeWhere((favorito) => favorito.isEqual(carro));
   }
 }

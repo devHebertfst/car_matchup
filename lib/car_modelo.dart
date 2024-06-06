@@ -9,6 +9,7 @@ class CarModel {
   final String preco;
   final String categoria;
   final String configuracao;
+  final String video;
 
   final List<String> imagens;
 
@@ -24,10 +25,10 @@ class CarModel {
     required this.imagens,
     required this.preco,
     required this.categoria,
+    required this.video,
   });
 
   factory CarModel.fromJson(Map<String, dynamic> json) {
-  // Convertendo a lista de imagens do JSON para uma lista de strings
   List<String> imagens = [];
   if (json['imagens'] is List) {
     imagens = List<String>.from(json['imagens']);
@@ -44,6 +45,7 @@ class CarModel {
     portas: json['portas'],
     preco: json['preco'],
     categoria: json['categoria'],
+    video: json['video'],
     imagens: imagens, // Usando a lista de imagens processada
   );
 }

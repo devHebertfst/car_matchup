@@ -202,16 +202,14 @@ List<Widget> _buildCarCategorySections() {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Flexible(
-                        child: Text(
-                          carros[index].modelo,
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1, // Limita a duas linhas para evitar expansão vertical excessiva
+                      child: Text(
+                        carros[index].modelo,
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1, // Limita a duas linhas para evitar expansão vertical excessiva
                       ),
                     ),
                     Padding(
