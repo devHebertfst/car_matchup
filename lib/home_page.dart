@@ -56,7 +56,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Tabela Fipe Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -130,7 +129,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 40),
-              // Horizontal ListView
               Container(
                 height: 160,
                 child: ListView(
@@ -193,7 +191,7 @@ List<Widget> _buildCarCategorySections() {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          carros[index].imagens[0], // Aqui estamos usando apenas a primeira imagem do carro
+                          carros[index].imagens[0],
                           width: 150,
                           height: 100,
                           fit: BoxFit.cover,
@@ -209,7 +207,7 @@ List<Widget> _buildCarCategorySections() {
                           fontWeight: FontWeight.w500,
                         ),
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 1, // Limita a duas linhas para evitar expansão vertical excessiva
+                        maxLines: 1,
                       ),
                     ),
                     Padding(

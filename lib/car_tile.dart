@@ -29,18 +29,32 @@ class CarTile extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
-                  child: Image.network(
-                    car.imagens.first,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
+                  child: Container(
+                    color: Colors.grey[200],
+                    child: Image.network(
+                      car.imagens.first,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.grey[300],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Positioned(
                   top: 0,
                   left: 0,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
                     decoration: BoxDecoration(
                       color: Colors.orange,
                       borderRadius: BorderRadius.only(

@@ -46,7 +46,7 @@ class CarModel {
     preco: json['preco'],
     categoria: json['categoria'],
     video: json['video'],
-    imagens: imagens, // Usando a lista de imagens processada
+    imagens: imagens,
   );
 }
 

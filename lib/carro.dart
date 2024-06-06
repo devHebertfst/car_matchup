@@ -16,8 +16,7 @@ class Carro {
   String mesReferencia;
   String valor;
   bool isExpanded = false;
-
-  // Método para comparar carros
+  
   bool isEqual(Carro other) {
     return this.marca == other.marca &&
         this.modelo == other.modelo &&

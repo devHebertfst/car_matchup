@@ -34,7 +34,7 @@ class _NoticiasPageState extends State<NoticiasPage> {
                           children: [
                             IconButton(
                               icon: Icon(
-                                Icons.arrow_back, // Ícone de voltar
+                                Icons.arrow_back,
                                 color: Colors.black,
                                 size: 24,
                               ),

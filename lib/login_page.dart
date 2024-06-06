@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Espaço entre os campos de texto
+              SizedBox(height: 20),
               Material(
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Espaço entre o botão e o texto final
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

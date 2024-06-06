@@ -53,7 +53,7 @@ class _CadastroPageState extends State<CadastroPage> {
               ),
               SizedBox(height: 20),
               Material(
-                elevation: 5, // Elevação para a sombra
+                elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: 64,
@@ -73,9 +73,9 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Espaço entre os campos de texto
+              SizedBox(height: 20),
               Material(
-                elevation: 5, // Elevação para a sombra
+                elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: 64,
@@ -97,7 +97,7 @@ class _CadastroPageState extends State<CadastroPage> {
               ),
               SizedBox(height: 20),
               Material(
-                elevation: 5, // Elevação para a sombra
+                elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: 64,
@@ -119,7 +119,7 @@ class _CadastroPageState extends State<CadastroPage> {
               ),
               SizedBox(height: 20),
               Material(
-                elevation: 5, // Elevação para a sombra
+                elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   height: 64,

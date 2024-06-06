@@ -2,9 +2,14 @@ import 'package:car_matchup/cadastro_page.dart';
 import 'package:car_matchup/custom_page.dart';
 import 'package:car_matchup/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MainApp());
+  });
 }
 
 class MainApp extends StatelessWidget {

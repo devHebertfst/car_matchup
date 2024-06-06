@@ -94,7 +94,25 @@ class _CarDetailPageState extends State<CarDetailPage> {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(6.0),
-                              child: Image.network(image, width: 100, height: 60, fit: BoxFit.cover),
+                              child: Container(
+                                color: Colors.grey[200],
+                                child: Image.network(
+                                  image,
+                                  width: 100,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (context, child, progress){
+                                    if(progress == null){
+                                      return child;
+                                    }
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.grey[300],
+                                      ),
+                                    );
+                                  },
+                                  ),
+                              ),
                             ),
                           ),
                         );
@@ -124,30 +142,6 @@ class _CarDetailPageState extends State<CarDetailPage> {
                     _buildRow('Lugares', '${widget.car.lugares}', labelStyle, valueStyle),
                     _buildRow('Portas', '${widget.car.portas}', labelStyle, valueStyle),
                     SizedBox(height: 16),
-                    Container(
-                      height: 70,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(255, 92, 0, 1), // Background color
-                          foregroundColor: Colors.white, // Text color
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => VideoPage(videoUrl: widget.car.video),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Ver Vídeo',
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
