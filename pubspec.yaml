@@ -1,0 +1,52 @@
+name: car_matchup
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
+  device_info_plus: ^10.1.0
+  flutter:
+    sdk: flutter
+  flutter_inappwebview: ^6.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
+  google_fonts: ^6.2.1
+  http: ^1.2.1
+  image_picker: ^1.1.2
+  permission_handler: ^11.3.1
+  webview_flutter: ^4.8.0
+  youtube_player_flutter: ^9.0.1
+
+flutter_native_splash:
+  color: "#FF5C00"
+  image: "assets/images/splash.png"
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: "assets/images/icon.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/icon-android.png"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/img4.jpg
+    - assets/images/Image22.png
+    - assets/images/Image23.png
+    - assets/images/Image24.png
+    - assets/images/Image25.png
+    - assets/json/carros.json
