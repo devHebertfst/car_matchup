@@ -1,4 +1,4 @@
-import 'package:car_matchup/noticias_page.dart';
+import 'package:car_matchup/Noticias/noticias_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';

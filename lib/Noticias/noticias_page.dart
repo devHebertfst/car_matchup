@@ -1,4 +1,7 @@
-import 'package:car_matchup/noticias1_page.dart';
+import 'package:car_matchup/Noticias/noticias1_page.dart';
+import 'package:car_matchup/Noticias/noticias2_page.dart';
+import 'package:car_matchup/Noticias/noticias3_page.dart';
+import 'package:car_matchup/Noticias/noticias4_page.dart';
 import 'package:flutter/material.dart';
 
 class NoticiasPage extends StatefulWidget {
@@ -85,7 +88,7 @@ class _NoticiasPageState extends State<NoticiasPage> {
                     () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Noticias1()),
+                        MaterialPageRoute(builder: (context) => Noticias2()),
                       );
                     },
                   ),
@@ -97,7 +100,7 @@ class _NoticiasPageState extends State<NoticiasPage> {
                     () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Noticias1()),
+                        MaterialPageRoute(builder: (context) => Noticias3()),
                       );
                     },
                   ),
@@ -109,7 +112,7 @@ class _NoticiasPageState extends State<NoticiasPage> {
                     () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Noticias1()),
+                        MaterialPageRoute(builder: (context) => Noticias4()),
                       );
                     },
                   ),

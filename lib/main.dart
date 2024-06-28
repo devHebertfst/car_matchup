@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:car_matchup/Pages/login_page.dart';
 import 'package:car_matchup/Models/Custom_page.dart';
-import 'package:car_matchup/favorites_manager.dart';
+import 'package:car_matchup/Models/favorites_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

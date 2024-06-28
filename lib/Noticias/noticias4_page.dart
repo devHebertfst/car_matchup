@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Noticias1 extends StatelessWidget {
-  const Noticias1({super.key});
+class Noticias4 extends StatelessWidget {
+  const Noticias4({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +43,14 @@ class Noticia1 extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-              image: AssetImage('assets/images/Image22.png'),
+              image: AssetImage('assets/images/Image25.png'),
               fit: BoxFit.cover,
             ),
           ),
         ),
         SizedBox(height: 16),
         Text(
-          'De Saveiro a L200: as 10 picapes mais baratas do Brasil em 2024',
+          'Lei quer isentar donos de carros usados de dívidas feitas antes da revenda',
           style: TextStyle(
             color: Colors.black,
             fontSize: 24,
@@ -61,7 +61,7 @@ class Noticia1 extends StatelessWidget {
         ),
         SizedBox(height: 16),
         Text(
-          'As picapes tiveram um crescimento exponencial no mercado brasileiro nos últimos anos, tanto em quantidade de modelos, quanto em vendas. No primeiro trimestre deste ano, segundo a Fenabrave, elas ficar... \n\nLeia mais em: https://quatrorodas.abril.com.br/noticias/de-saveiro-a-l200-as-10-picapes-mais-baratas-do-brasil-em-2024/',
+          'Você já se deparou com um veículo usado sendo vendido por um preço irresistível? Muitas vezes, a pegadinha pode estar nos débitos que esse carro carrega escondido, incluindo multas, tributos e encargos. Leia mais em: https://quatrorodas.abril.com.br/noticias/lei-quer-isentar-donos-de-carros-usados-de-dividas-feitas-antes-da-revenda',
           style: TextStyle(
             color: Colors.black,
             fontSize: 18,

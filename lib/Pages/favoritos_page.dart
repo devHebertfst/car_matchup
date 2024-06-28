@@ -1,7 +1,8 @@
 import 'package:car_matchup/Models/carro.dart';
-import 'package:car_matchup/favorites_manager.dart';
+import 'package:car_matchup/Models/favorites_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:car_matchup/Models/carro_selecionado.dart';
 
 class FavoritosPage extends StatefulWidget {
   const FavoritosPage({Key? key}) : super(key: key);
@@ -19,6 +20,11 @@ class _FavoritosPageState extends State<FavoritosPage> {
 
   Future<void> _carregarFavoritos() async {
     await FavoritesManager.carregarFavoritos();
+    setState(() {});
+  }
+
+  Future<void> _selecionarCarro(Carro carro) async {
+    await CarroSelecionado.selecionarCarro(carro);
     setState(() {});
   }
 
@@ -81,7 +87,9 @@ class _FavoritosPageState extends State<FavoritosPage> {
                                   icon: Icon(Icons.delete_forever, color: Color.fromRGBO(255, 92, 0, 1)),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _selecionarCarro(carro);
+                                  },
                                   icon: Icon(Icons.car_crash, color: Color.fromRGBO(255, 92, 0, 1)),
                                 ),
                               ],

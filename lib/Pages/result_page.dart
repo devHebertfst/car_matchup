@@ -1,5 +1,5 @@
 import 'package:car_matchup/Models/carro.dart';
-import 'package:car_matchup/favorites_manager.dart';
+import 'package:car_matchup/Models/favorites_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
