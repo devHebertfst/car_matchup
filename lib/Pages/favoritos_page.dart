@@ -1,4 +1,5 @@
-import 'package:car_matchup/carro.dart';
+import 'package:car_matchup/Models/carro.dart';
+import 'package:car_matchup/favorites_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +11,17 @@ class FavoritosPage extends StatefulWidget {
 }
 
 class _FavoritosPageState extends State<FavoritosPage> {
+  @override
+  void initState() {
+    super.initState();
+    _carregarFavoritos();
+  }
+
+  Future<void> _carregarFavoritos() async {
+    await FavoritesManager.carregarFavoritos();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,8 +132,8 @@ class _FavoritosPageState extends State<FavoritosPage> {
               child: Text('Não',style: GoogleFonts.poppins(fontSize: 16,color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
             ),
             TextButton(
-              onPressed: () {
-                FavoritesManager.removerFavorito(carro);
+              onPressed: () async {
+                await FavoritesManager.removerFavorito(carro);
                 setState(() {});
                 Navigator.of(context).pop();
               },

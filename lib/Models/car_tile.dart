@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:car_matchup/car_modelo.dart';
-import 'package:car_matchup/car_detail_page.dart';
+import 'package:car_matchup/Models/car_modelo.dart';
+import 'package:car_matchup/Pages/car_detail_page.dart';
 
 class CarTile extends StatelessWidget {
   final CarModel car;

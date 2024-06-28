@@ -26,21 +26,3 @@ class Carro {
         this.valor == other.valor;
   }
 }
-
-class FavoritesManager {
-  static List<Carro> _favoritos = [];
-
-  static List<Carro> get favoritos => _favoritos;
-
-  static bool adicionarFavorito(Carro carro) {
-    if (!_favoritos.any((favorito) => favorito.isEqual(carro))) {
-      _favoritos.add(carro);
-      return true;
-    }
-    return false;
-  }
-
-  static void removerFavorito(Carro carro) {
-    _favoritos.removeWhere((favorito) => favorito.isEqual(carro));
-  }
-}

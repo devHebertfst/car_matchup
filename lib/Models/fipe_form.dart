@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'result_page.dart';
+import '../Pages/result_page.dart';
 
 class FipeForm extends StatefulWidget {
   final Function(String, String, String, String) onSubmit;

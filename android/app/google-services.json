@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644563189108",
+    "project_id": "carmatchup",
+    "storage_bucket": "carmatchup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644563189108:android:32bdbd8f2e19fdef550021",
+        "android_client_info": {
+          "package_name": "com.example.car_matchup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDckaEniODFwBKhApIVnNKIR8L5JogKdS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

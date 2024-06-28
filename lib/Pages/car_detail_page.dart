@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:car_matchup/car_modelo.dart';
+import 'package:car_matchup/Models/car_modelo.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'video_page.dart';
 
 class CarDetailPage extends StatefulWidget {
   final CarModel car;

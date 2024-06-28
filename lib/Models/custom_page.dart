@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'favoritos_page.dart';
-import 'home_page.dart';
-import 'myCar_page.dart';
-import 'login_page.dart'; // Certifique-se de importar a página de login
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import '../Pages/favoritos_page.dart';
+import '../Pages/home_page.dart';
+import '../Pages/myCar_page.dart';
+import '../Pages/login_page.dart';
 
 class CustomPage extends StatefulWidget {
   const CustomPage({Key? key}) : super(key: key);
@@ -19,26 +21,67 @@ class CustomPageState extends State<CustomPage> {
   int paginaAtual = 0;
   late PageController pc;
   File? _image;
-  bool permissionGranted = false;
+  String? userName = 'Usuário';
+  String? userImageUrl;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   @override
   void initState() {
     super.initState();
     pc = PageController(initialPage: paginaAtual);
+    _loadUserData();
   }
 
-  setPaginaAtual(pagina) {
+  void setPaginaAtual(int pagina) {
     setState(() {
       paginaAtual = pagina;
     });
   }
 
+  Future<void> _loadUserData() async {
+    try {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        setState(() {
+          userName = user.displayName ?? 'Usuário';
+          userImageUrl = user.photoURL;
+        });
+      }
+    } catch (e) {
+      print('Erro ao carregar dados do usuário: $e');
+    }
+  }
+
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        File imageFile = File(pickedFile.path);
+        setState(() {
+          _image = imageFile;
+        });
+        await _uploadImage(imageFile);
+      }
+    } catch (e) {
+      print('Erro ao selecionar imagem: $e');
+    }
+  }
+
+  Future<void> _uploadImage(File imageFile) async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      try {
+        TaskSnapshot uploadTask = await _storage.ref('user_images/${user.uid}').putFile(imageFile);
+        String downloadUrl = await uploadTask.ref.getDownloadURL();
+        await user.updatePhotoURL(downloadUrl);
+        setState(() {
+          userImageUrl = downloadUrl;
+        });
+      } catch (e) {
+        print('Erro ao fazer upload da imagem: $e');
+      }
     }
   }
 
@@ -47,15 +90,15 @@ class CustomPageState extends State<CustomPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Sair da conta?',style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600)),
+          title: Text('Sair da conta?', style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600)),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Não',style: GoogleFonts.poppins(fontSize: 16,color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
+              child: Text('Não', style: GoogleFonts.poppins(fontSize: 16, color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Sim',style: GoogleFonts.poppins(fontSize: 16,color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
+              child: Text('Sim', style: GoogleFonts.poppins(fontSize: 16, color: Color.fromRGBO(255, 92, 0, 1), fontWeight: FontWeight.w500)),
             ),
           ],
         );
@@ -63,6 +106,7 @@ class CustomPageState extends State<CustomPage> {
     );
 
     if (shouldSignOut == true) {
+      await _auth.signOut();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LoginPage()),
       );
@@ -117,17 +161,17 @@ class CustomPageState extends State<CustomPage> {
                           child: CircleAvatar(
                             radius: 55,
                             backgroundColor: Colors.white,
-                            child: _image == null
+                            child: userImageUrl == null
                                 ? Icon(Icons.add, size: 50, color: Colors.grey)
                                 : CircleAvatar(
                                     radius: 50,
-                                    backgroundImage: FileImage(_image!),
+                                    backgroundImage: NetworkImage(userImageUrl!),
                                   ),
                           ),
                         ),
                         SizedBox(width: 20),
                         Text(
-                          'Fulano',
+                          userName ?? 'Usuário',
                           style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 24,

@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:car_matchup/car_modelo.dart';
-import 'package:car_matchup/car_tile.dart';
+import 'package:car_matchup/Models/car_modelo.dart';
+import 'package:car_matchup/Models/car_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'result_page.dart';
-import 'fipe_form.dart';
+import '../Models/fipe_form.dart';
 import 'car_detail_page.dart';
 
 class HomePage extends StatefulWidget {

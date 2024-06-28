@@ -1,4 +1,5 @@
-import 'package:car_matchup/carro.dart';
+import 'package:car_matchup/Models/carro.dart';
+import 'package:car_matchup/favorites_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -84,7 +85,7 @@ class _ResultPageState extends State<ResultPage> {
                                   padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                                   textStyle: const TextStyle(fontSize: 15),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (vehicleData != null) {
                                     final carro = Carro(
                                       modelo: vehicleData!['Modelo'],
@@ -95,7 +96,7 @@ class _ResultPageState extends State<ResultPage> {
                                       valor: vehicleData!['Valor'],
                                       isExpanded: false,
                                     );
-                                    final isAdded = FavoritesManager.adicionarFavorito(carro);
+                                    final isAdded = await FavoritesManager.adicionarFavorito(carro);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(isAdded

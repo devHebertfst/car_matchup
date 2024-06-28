@@ -1,15 +1,38 @@
-import 'package:car_matchup/login_page.dart';
+import 'package:car_matchup/Pages/cadastro_page.dart';
+import 'package:car_matchup/Models/custom_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class CadastroPage extends StatefulWidget {
-  const CadastroPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _CadastroPageState createState() => _CadastroPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _CadastroPageState extends State<CadastroPage> {
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _login() async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => CustomPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro: ${e.message}')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +59,16 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 100),
               Text(
-                'Cadastro',
+                'Login',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                'Ache o carro ideal para você',
+                'Bem vindo ao CarMatchup',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -63,31 +86,10 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                   child: Center(
                     child: TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.person, color: Colors.grey),
-                        hintText: 'Nome de usuário',
-                        hintStyle: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: 64,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: Center(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.email_rounded, color: Colors.grey),
+                        prefixIcon: Icon(Icons.email, color: Colors.grey),
                         hintText: 'Email',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
@@ -107,28 +109,8 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                   child: Center(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.phone, color: Colors.grey),
-                        hintText: 'Telefone',
-                        hintStyle: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: 64,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: Center(
-                    child: TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.lock, color: Colors.grey),
@@ -137,6 +119,14 @@ class _CadastroPageState extends State<CadastroPage> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              SizedBox(height: 40),
+              Text(
+                'Esqueceu a senha?',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(height: 20),
@@ -152,9 +142,9 @@ class _CadastroPageState extends State<CadastroPage> {
                     ),
                     textStyle: const TextStyle(fontSize: 15),
                   ),
-                  onPressed: () {},
+                  onPressed: _login,
                   child: Text(
-                    'Cadastre-se',
+                    'Login',
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       color: Colors.white,
@@ -168,7 +158,7 @@ class _CadastroPageState extends State<CadastroPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Já tem uma conta?',
+                    'Não tem uma conta?',
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,
@@ -180,11 +170,11 @@ class _CadastroPageState extends State<CadastroPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => CadastroPage()),
                       );
                     },
                     child: Text(
-                      'Login',
+                      'Cadastre-se',
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         color: Color.fromRGBO(255, 92, 0, 1),
