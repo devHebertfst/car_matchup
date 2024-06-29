@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:car_matchup/Models/car_modelo.dart';
 import 'package:car_matchup/Models/car_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'result_page.dart';
 import '../Models/fipe_form.dart';
@@ -26,12 +26,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadCarros() async {
-    final String response = await rootBundle.loadString('assets/json/carros.json');
-    final List<dynamic> data = json.decode(response);
-    setState(() {
-      _carros = data.map((item) => CarModel.fromJson(item)).toList();
-      _carrosPorCategoria = _categorizeCarros(_carros);
-    });
+    try {
+      // Acessando a coleção 'carros' no Firestore
+      CollectionReference carrosCollection = FirebaseFirestore.instance.collection('carros');
+      QuerySnapshot snapshot = await carrosCollection.get();
+      
+      List<CarModel> carros = [];
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        carros.add(CarModel.fromJson(data));
+      }
+
+      setState(() {
+        _carros = carros;
+        _carrosPorCategoria = _categorizeCarros(_carros);
+      });
+    } catch (e) {
+      // Lidar com erros de carregamento
+      print('Erro ao carregar dados dos carros: $e');
+    }
   }
 
   Map<String, List<CarModel>> _categorizeCarros(List<CarModel> carros) {
@@ -145,96 +158,92 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-List<Widget> _buildCarCategorySections() {
-  List<Widget> sections = [];
-  _carrosPorCategoria.forEach((categoria, carros) {
-    sections.add(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(9, 0, 0, 0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '$categoria',
-                style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+  List<Widget> _buildCarCategorySections() {
+    List<Widget> sections = [];
+    _carrosPorCategoria.forEach((categoria, carros) {
+      sections.add(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(9, 0, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '$categoria',
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            const SizedBox(height: 20),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemCount: carros.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CarDetailPage(car: carros[index]),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            carros[index].imagens[0],
+                            width: 150,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          carros[index].modelo,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          carros[index].preco,
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
-            itemCount: carros.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CarDetailPage(car: carros[index]),
-                    ),
-                  );
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          carros[index].imagens[0],
-                          width: 150,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Text(
-                        carros[index].modelo,
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        carros[index].preco,
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 40),
-        ],
-      ),
-    );
-  });
-  return sections;
-}
-
-
-
-
+            const SizedBox(height: 40),
+          ],
+        ),
+      );
+    });
+    return sections;
+  }
 }
