@@ -1,5 +1,6 @@
 import 'package:car_matchup/Pages/cadastro_page.dart';
 import 'package:car_matchup/Models/custom_page.dart';
+import 'package:car_matchup/Pages/reset_senha.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -122,11 +123,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 40),
-              Text(
-                'Esqueceu a senha?',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResetSenha()),
+                  );
+                },
+                child: Text(
+                  'Esqueceu a senha?',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
